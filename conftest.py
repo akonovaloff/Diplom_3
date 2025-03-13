@@ -5,6 +5,7 @@ import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 from utils.browser_config import BrowserConfig
 
+
 @pytest.fixture(params=["chrome", "firefox"])
 def page(request) -> Generator[Page, Any, None]:
     browser_type = request.param

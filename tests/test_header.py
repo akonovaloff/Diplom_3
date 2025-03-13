@@ -12,8 +12,10 @@ class TestHeader:
     @pytest.mark.parametrize("from_url,     element_to_click,       to_url,        necessary_element_locator", [
                             [Urls.main_url, Loc.Header.constructor, Urls.main_url, Loc.Constructor.ingredients_box],
                             [Urls.feed,     Loc.Header.constructor, Urls.main_url, Loc.Constructor.ingredients_box],
+                            [Urls.login,    Loc.Header.constructor, Urls.main_url, Loc.Constructor.ingredients_box],
                             [Urls.main_url, Loc.Header.feed,        Urls.feed,     Loc.Feed.feed_box],
                             [Urls.feed,     Loc.Header.feed,        Urls.feed,     Loc.Feed.feed_box],
+                            [Urls.login,    Loc.Header.feed,        Urls.feed,     Loc.Feed.feed_box],
     ])
     @allure.title("Check transition by click on element")
     def test_transition_by_click_on_element(self, page, from_url, element_to_click, to_url, necessary_element_locator):
@@ -38,7 +40,11 @@ class TestHeader:
                           attachment_type=allure.attachment_type.PNG)
         with allure.step("Click on the element_to_click"):
             # click
+            allure.attach(element.screenshot(),
+                          name="element_to_click_screenshot",
+                          attachment_type=allure.attachment_type.PNG)
             element.click()
+
 
         with allure.step("Checking the destination page"):
             # User must be redirected to the burger constructor page
