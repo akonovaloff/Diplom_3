@@ -8,27 +8,32 @@ from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 from utils.browser_config import BrowserConfig
 
 
-@pytest.fixture(params=["chrome", "firefox"])
-def page(request) -> Generator[Page, Any, None]:
+@pytest.fixture(params=BrowserConfig.SUPPORTED_BROWSER)
+def browser(request):
     browser_type = request.param
     allure.dynamic.tag(browser_type)
+    return browser_type
+
+
+@pytest.fixture()
+def page(browser) -> Generator[Page, Any, None]:
     playwright = sync_playwright().start()
-    if browser_type == 'firefox':
-        browser = get_firefox_browser(playwright)
-        context = get_context(browser)
+    if browser == 'firefox':
+        driver = get_firefox_browser(playwright)
+        context = get_context(driver)
         page_data = context.new_page()
-    elif browser_type == 'chrome':
-        browser = get_chrome_browser(playwright)
-        context = get_context(browser)
+    elif browser == 'chrome':
+        driver = get_chrome_browser(playwright)
+        context = get_context(driver)
         page_data = context.new_page()
     else:
-        browser = get_chrome_browser(playwright)
-        context = get_context(browser)
+        driver = get_chrome_browser(playwright)
+        context = get_context(driver)
         page_data = context.new_page()
     yield page_data
-    for context in browser.contexts:
+    for context in driver.contexts:
         context.close()
-    browser.close()
+    driver.close()
     playwright.stop()
 
 

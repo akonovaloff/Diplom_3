@@ -5,3 +5,4 @@ class BrowserConfig:
     SLOW_MO = 50
     LOCALE = 'en-US'
     DEFAULT_TIMEOUT = 25 * 1000 # for slow connection
+    SUPPORTED_BROWSER = ["chrome", "firefox"]

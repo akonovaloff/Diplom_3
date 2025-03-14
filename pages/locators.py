@@ -14,6 +14,7 @@ class Locators:
         lower_bun = "//span[text()='Перетяните булочку сюда (низ)']"
         all_ingredients = "//a[@class='BurgerIngredient_ingredient__1TVf6 ml-4 mr-4 mb-8']"
         ingredient_popup_window = "//div[contains(@class, 'Modal_modal__contentBox__sCy8X pt-10 pb-15')]"
+        ingredient_name = "//p[contains(@class, 'BurgerIngredient_ingredient__text')]"
 
     class Feed:
         feed_box = "//div[contains(@class, 'OrderFeed_contentBox')]"
