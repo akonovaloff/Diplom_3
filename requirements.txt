@@ -5,3 +5,4 @@ pytest-xdist
 pytest-playwright
 playwright
 PyAutoGUI
+allure-python-commons

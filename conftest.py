@@ -1,5 +1,7 @@
 from typing import Any, Generator
 
+import allure
+from allure_commons.types import LabelType
 import pytest
 
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
@@ -9,6 +11,7 @@ from utils.browser_config import BrowserConfig
 @pytest.fixture(params=["chrome", "firefox"])
 def page(request) -> Generator[Page, Any, None]:
     browser_type = request.param
+    allure.dynamic.tag(browser_type)
     playwright = sync_playwright().start()
     if browser_type == 'firefox':
         browser = get_firefox_browser(playwright)
