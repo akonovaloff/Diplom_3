@@ -14,28 +14,27 @@ class TestSiteHeader:
         with allure.step(f"Open start page: {site_hande}"):
             page.goto(url)
 
-    @pytest.mark.parametrize("element_to_click,         to_url,                 necessary_element_locator", [
+    @pytest.mark.parametrize("element_to_click,         destination_url,        mandatory_element_locator", [
                             [Loc.Header.constructor,    Urls.main_url,          Loc.Constructor.ingredients_box],
                             [Loc.Header.feed,           Urls.feed,              Loc.Feed.feed_box],
                             [Loc.Header.login,          Urls.login,             Loc.Login.email_input],
     ])
-    # <!-- anchor test_transition_by_click_on_element -->
-    def test_transition_by_click_on_element(self, page, element_to_click: str, to_url: str,
-                                            necessary_element_locator: str):
+    def test_transition_by_click_on_element(self, page, element_to_click: str, destination_url,
+                                            mandatory_element_locator):
         """
         The test checks the transition to the destination page after clicking on a site header element:
         1. Opens the source page, waits for the element to be visible (element_to_click), hovers the cursor and takes a screenshot.
         2. Performs a click on an element (element_to_click).
-        3. Checks redirection to to_url, waits for the required element to be visible (necessary_element_locator), takes a screenshot and checks for the element.
+        3. Checks redirection to destination_url, waits for the required element to be visible (mandatory_element_locator), takes a screenshot and checks for the element.
         """
         # Prepare Allure titles and labels
         element_name = element_to_click.split("'")[1]
-        destination = "site" + to_url.replace(Urls.main_url, "")
+        destination = "site" + destination_url.replace(Urls.main_url, "")
         allure.dynamic.feature("HEADER", element_name)
         allure.dynamic.tag("HEADER", element_name)
         allure.dynamic.parameter("element_to_click", element_name)
-        allure.dynamic.parameter("to_url", destination)
-        allure.dynamic.parameter("necessary_element_locator", "page")
+        allure.dynamic.parameter("destination_url", destination)
+        allure.dynamic.parameter("mandatory_element_locator", "page")
         # Starting the test
         with allure.step("Waiting for element_to_click to be visible"):
             # Waiting for element_to_click is visible
@@ -56,9 +55,9 @@ class TestSiteHeader:
 
         with allure.step("Checking the destination page"):
             # User must be redirected to the burger constructor page
-            page.wait_for_url(to_url)
+            page.wait_for_url(destination_url)
             # Waiting for necessary_element is visible
-            necessary_element = page.locator(necessary_element_locator)
+            necessary_element = page.locator(mandatory_element_locator)
             necessary_element.wait_for(timeout=5000, state="visible")
             # Take the to_page screenshot
             allure.attach(page.screenshot(),
