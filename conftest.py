@@ -1,12 +1,28 @@
 from typing import Any, Generator
 
+# framework
 import allure
-from allure_commons.types import LabelType
 import pytest
-
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
-from utils.browser_config import BrowserConfig
 
+from burger_user import BurgerUser
+# project
+from utils.browser_config import BrowserConfig
+from api.burger_user import BurgerUser
+
+
+@pytest.fixture
+def new_user() -> Generator[BurgerUser, Any, None]:
+    """Generate new user data: email, password, name"""
+    user = BurgerUser()
+    yield user
+    user.__del__()
+
+@pytest.fixture()
+def existing_user(new_user) -> BurgerUser:
+    response = new_user.registration()
+    assert response.success, "The user must be registered before tests"
+    return new_user
 
 @pytest.fixture(params=BrowserConfig.SUPPORTED_BROWSER)
 def browser(request):
@@ -16,7 +32,7 @@ def browser(request):
 
 
 @pytest.fixture()
-def page(browser) -> Generator[Page, Any, None]:
+def pw(browser) -> Generator[Page, Any, None]:
     playwright = sync_playwright().start()
     if browser == 'firefox':
         driver = get_firefox_browser(playwright)

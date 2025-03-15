@@ -1,15 +1,25 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, Playwright, Locator
+from abc import abstractmethod
+from pages.header import Header
 
 class BasePage:
-    """
-    Базовый класс для всех страниц.
-    Инкапсулирует общие методы и функциональность.
-    """
+    @property
+    @abstractmethod
+    def url(self) -> str:
+        pass
 
-    def __init__(self, page: Page, url: str):
-        """
-        Конструктор базового класса.
-        :param page: Экземпляр страницы Playwright.
-        """
-        self.page = page
-        self.page.goto(url)
+    @property
+    @abstractmethod
+    def locators(self):
+        pass
+
+    @abstractmethod
+    def assign_page_elements_by_locators(self):
+        pass
+
+    def __init__(self, page: Page):
+        self.pw: Page = page
+        self.pw.goto(self.url)
+        self.header = Header(self.pw)
+        self.assign_page_elements_by_locators()
+

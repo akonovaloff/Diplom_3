@@ -12,9 +12,9 @@ class TestBurgerConstructor:
     number_of_ingredients: int = 15
 
     @pytest.fixture(autouse=True)
-    def open_burger_constructor_page(self, page):
-        page.goto(Urls.main_url)
-        allure.attach(page.screenshot(),
+    def open_burger_constructor_page(self, pw):
+        pw.goto(Urls.main_url)
+        allure.attach(pw.screenshot(),
                       name="BurgerConstructor_screenshot",
                       attachment_type=allure.attachment_type.PNG)
 
@@ -22,7 +22,7 @@ class TestBurgerConstructor:
     @allure.feature("CONSTRUCTOR")
     @pytest.mark.parametrize("ingredient_index", range(0, number_of_ingredients))
     @allure.title("Test Ingredient Pop-up Window")
-    def test_ingredients_details_popup_window(self, page, ingredient_index: int):
+    def test_ingredients_details_popup_window(self, pw, ingredient_index: int):
         """The test checks the display of a pop-up window with ingredient details in the burger constructor
             for each of the 15 ingredients. The test performs the following steps:
             1. Selects a random ingredient by index (0–14), scrolls it into view, hovers over it,
@@ -32,7 +32,7 @@ class TestBurgerConstructor:
                and asserts that the window is displayed.
             4. Verifies that the name of the selected ingredient is visible in the pop-up window."""
         # Select all ingredients
-        ingredients = page.locator(Loc.Constructor.all_ingredients)
+        ingredients = pw.locator(Loc.Constructor.all_ingredients)
         # Select ingredient with index
         with allure.step(f"Select the ingredient with index={ingredient_index}"):
             ingredient = ingredients.nth(ingredient_index)
@@ -48,8 +48,8 @@ class TestBurgerConstructor:
             ingredient.click()
         # Checking of Pop-up Window
         with allure.step("Check if pop-up window is visible"):
-            popup_window = page.locator(Loc.Constructor.ingredient_popup_window)
-            allure.attach(page.screenshot(),
+            popup_window = pw.locator(Loc.Constructor.ingredient_popup_window)
+            allure.attach(pw.screenshot(),
                           name="page_with_ingredient_details_screenshot",
                           attachment_type=allure.attachment_type.PNG)
             assert popup_window.is_visible(), "Pop-up window must be visible"
@@ -65,8 +65,8 @@ class TestBurgerConstructor:
                           name="popup_window_close_button_screenshot",
                           attachment_type=allure.attachment_type.PNG)
             close_button.click()
-            page.wait_for_selector(Loc.Constructor.ingredient_popup_window, timeout=3000, state="hidden")
-            allure.attach(page.screenshot(),
+            pw.wait_for_selector(Loc.Constructor.ingredient_popup_window, timeout=3000, state="hidden")
+            allure.attach(pw.screenshot(),
                           name="closed_popup_window_page_screenshot",
                           attachment_type=allure.attachment_type.PNG)
             # Make sure that the pop-up window can be closed.
