@@ -6,9 +6,9 @@ from pages.locators import Locators as Loc
 import allure
 
 
-class TestSiteHeader:
+class TestPageHeader:
     @pytest.fixture(params=[Urls.feed, Urls.login, Urls.main_url], autouse=True)
-    def from_page(self, pw, request):
+    def start_page(self, pw, request):
         url: str = request.param
         site_hande = "site" + url.replace(Urls.main_url, "")
         with allure.step(f"Open start pw: {site_hande}"):
@@ -16,11 +16,11 @@ class TestSiteHeader:
 
     @pytest.mark.parametrize("element_to_click,         destination_url,        mandatory_element_locator", [
                             [Loc.Header.constructor,    Urls.main_url,          Loc.Constructor.ingredients_box],
-                            [Loc.Header.feed,           Urls.feed,              Loc.Feed.feed_box],
+                            [Loc.Header.feed,           Urls.feed,              Loc.Feed.Status.status_box],
                             [Loc.Header.login,          Urls.login,             Loc.Login.email_input],
     ])
-    def test_transition_by_click_on_element(self, pw, element_to_click: str, destination_url,
-                                            mandatory_element_locator):
+    def test_transitions_from_header_elements(self, pw, element_to_click: str, destination_url,
+                                              mandatory_element_locator):
         """
         The test checks the transition to the destination pw after clicking on a site header element:
         1. Opens the source pw, waits for the element to be visible (element_to_click), hovers the cursor and takes a screenshot.
@@ -30,11 +30,14 @@ class TestSiteHeader:
         # Prepare Allure titles and labels
         element_name = element_to_click.split("'")[1]
         destination = "site" + destination_url.replace(Urls.main_url, "")
+        allure.dynamic.title(f"Test transitions from header's links")
         allure.dynamic.feature("HEADER", element_name)
         allure.dynamic.tag("HEADER", element_name)
         allure.dynamic.parameter("element_to_click", element_name)
         allure.dynamic.parameter("destination_url", destination)
-        allure.dynamic.parameter("mandatory_element_locator", "pw")
+        allure.dynamic.parameter("mandatory_element_locator", "destination_url:")
+        allure.dynamic.parameter("start_page", pw.url.replace(Urls.main_url, ""))
+
         # Starting the test
         with allure.step("Waiting for element_to_click to be visible"):
             # Waiting for element_to_click is visible

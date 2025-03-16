@@ -1,13 +1,13 @@
-from pages.base_page import BasePage
+from pages.base_page import BasePage, Page
 from utils.urls import Urls
 from pages.locators import Locators as Loc
-
 
 class ConstructorPage(BasePage):
     url = Urls.main_url
     locators = Loc.Constructor
 
-    def assign_page_elements_by_locators(self):
+    def __init__(self, pw: Page):
+        super().__init__(pw, self.url)
         assign_element = lambda loc: self.pw.locator(loc)
 
         self.all_ingredients = assign_element(self.locators.all_ingredients)

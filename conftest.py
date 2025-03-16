@@ -5,10 +5,43 @@ import allure
 import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 
-from burger_user import BurgerUser
 # project
 from utils.browser_config import BrowserConfig
 from api.burger_user import BurgerUser
+from pages.login_page import LoginPage
+from pages.constructor_page import ConstructorPage
+from pages.base_page import BasePage
+from pages.feed_page import FeedPage
+from pages.profile_page import ProfilePage
+
+
+@pytest.fixture()
+def constructor_page(pw) -> ConstructorPage:
+    return ConstructorPage(pw)
+
+
+@pytest.fixture()
+def base_page(pw) -> BasePage:
+    return BasePage(pw)
+
+
+@pytest.fixture()
+def feed_page(pw) -> FeedPage:
+    return FeedPage(pw)
+
+
+@pytest.fixture()
+def profile_page(pw) -> ProfilePage:
+    return ProfilePage(pw)
+
+
+@pytest.fixture()
+def user_is_logged_in(existing_user, pw) -> Page:
+    page = LoginPage(pw)
+    page.email_input.type(existing_user.email)
+    page.password_input.type(existing_user.password)
+    page.login_button.click()
+    return pw
 
 
 @pytest.fixture
@@ -18,11 +51,15 @@ def new_user() -> Generator[BurgerUser, Any, None]:
     yield user
     user.__del__()
 
+
 @pytest.fixture()
-def existing_user(new_user) -> BurgerUser:
-    response = new_user.registration()
+def existing_user() -> Generator[BurgerUser, Any, None]:
+    user = BurgerUser()
+    response = user.registration()
     assert response.success, "The user must be registered before tests"
-    return new_user
+    yield user
+    user.__del__()
+
 
 @pytest.fixture(params=BrowserConfig.SUPPORTED_BROWSER)
 def browser(request):

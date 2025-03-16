@@ -1,8 +1,13 @@
-from playwright.sync_api import Page, Playwright, Locator
+import allure
+from playwright.sync_api import Page, Playwright, Locator, expect
 from abc import abstractmethod
-from pages.header import Header
+from pages.header_page import Header
+from api.burger_user import BurgerUser
+
 
 class BasePage:
+    user: BurgerUser
+
     @property
     @abstractmethod
     def url(self) -> str:
@@ -13,13 +18,35 @@ class BasePage:
     def locators(self):
         pass
 
-    @abstractmethod
-    def assign_page_elements_by_locators(self):
-        pass
 
-    def __init__(self, page: Page):
+    @allure.step("Open page")
+    def __init__(self, page: Page, url: str):
         self.pw: Page = page
-        self.pw.goto(self.url)
+        self.pw.goto(url=url)
         self.header = Header(self.pw)
-        self.assign_page_elements_by_locators()
+        allure.attach(page.screenshot(),
+                      name="page-screenshot",
+                      attachment_type=allure.attachment_type.PNG)
+
+    @staticmethod
+    @allure.step("Click on an element")
+    def click(element: Locator):
+        element.scroll_into_view_if_needed()
+        element.hover()
+        allure.attach(element.screenshot(),
+                      name="element-screenshot",
+                      attachment_type=allure.attachment_type.PNG)
+        element.click()
+
+    @staticmethod
+    @allure.step("Type text")
+    def type(element: Locator, text: str):
+        element.type(text=text)
+        allure.attach(element.screenshot(),
+                      name="element-screenshot",
+                      attachment_type=allure.attachment_type.PNG)
+
+    @allure.step("Expecting page to have url")
+    def expect_to_have_url(self, url: str):
+        expect(self.pw).to_have_url(url, timeout=0)
 
