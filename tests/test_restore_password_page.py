@@ -27,7 +27,7 @@ class TestRestorePassword:
         A Fixture to open the site's forgot password page
         """
         pw = transition_to_forgot_password_page
-        page = BasePage(pw, pw.url)
+        page = BasePage(pw)
         button = pw.locator("(//button)[1]")
         page.click(button)
         page.expect_to_have_url(Urls.reset_password)
@@ -53,7 +53,7 @@ class TestRestorePassword:
         3. clicks on the restore button and then checks url of the destination page
         """
         with transition_to_forgot_password_page as pw:
-            page = BasePage(pw, pw.url)
+            page = BasePage(pw)
             email_input = pw.locator("(//input)")
             page.type(email_input, "default_email@provider.com")
             button = pw.locator("(//button)[1]")
