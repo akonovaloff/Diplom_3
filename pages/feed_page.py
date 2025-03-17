@@ -8,7 +8,10 @@ class FeedPage(BasePage):
     locators = Loc.Feed
 
     def __init__(self, pw: Page):
-        super().__init__(pw, self.url)
+        super().__init__(pw)
+        self.pw.goto(Urls.main_url)
+        self.header.feed_button.click()
+        self.pw.wait_for_load_state(state="networkidle", timeout=5000)
         assign_element = lambda loc: self.pw.locator(loc)
         # Orders
         self.order_list = assign_element(self.locators.Orders.order_list)

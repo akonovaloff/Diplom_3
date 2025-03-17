@@ -10,7 +10,7 @@ from pages.base_page import BasePage
 
 
 
-class TestRestorePassword:
+class TestRestorePasswordPage:
     @pytest.fixture()
     def transition_to_forgot_password_page(self, pw):
         """

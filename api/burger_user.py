@@ -93,7 +93,7 @@ class BurgerUser:
         else:
             # Сгенерировать новый email и перезапустить регистрацию
             self.generate_email()
-            self.registration()
+            response = self.registration()
         return response
 
     def update_info(self):

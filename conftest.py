@@ -2,7 +2,7 @@ from typing import Any, Generator
 
 # framework
 import allure
-import pytest
+
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 
 # project
@@ -13,6 +13,7 @@ from pages.constructor_page import ConstructorPage
 from pages.base_page import BasePage
 from pages.feed_page import FeedPage
 from pages.profile_page import ProfilePage
+import pytest
 
 
 @pytest.fixture()
@@ -36,12 +37,16 @@ def profile_page(pw) -> ProfilePage:
 
 
 @pytest.fixture()
-def user_is_logged_in(existing_user, pw) -> Page:
-    page = LoginPage(pw)
-    page.email_input.type(existing_user.email)
-    page.password_input.type(existing_user.password)
-    page.login_button.click()
-    return pw
+def login_user():
+    def do_login_user(playwright: Page, user: BurgerUser):
+        page = LoginPage(playwright)
+        page.email_input.type(user.email)
+        page.password_input.type(user.password)
+        page.login_button.click()
+        page.pw.wait_for_load_state(state="networkidle", timeout=5000)
+        return playwright
+
+    return do_login_user
 
 
 @pytest.fixture
@@ -49,7 +54,6 @@ def new_user() -> Generator[BurgerUser, Any, None]:
     """Generate new user data: email, password, name"""
     user = BurgerUser()
     yield user
-    user.__del__()
 
 
 @pytest.fixture()
@@ -58,7 +62,6 @@ def existing_user() -> Generator[BurgerUser, Any, None]:
     response = user.registration()
     assert response.success, "The user must be registered before tests"
     yield user
-    user.__del__()
 
 
 @pytest.fixture(params=BrowserConfig.SUPPORTED_BROWSER)

@@ -4,5 +4,5 @@ class BrowserConfig:
     IS_HEADLESS = False # do not change
     SLOW_MO = 50
     LOCALE = 'en-US'
-    DEFAULT_TIMEOUT = 25 * 1000 # for slow connection
+    DEFAULT_TIMEOUT = 10 * 1000 # for slow connection
     SUPPORTED_BROWSER = ["chrome"] # select "chrome" or/and "firefox"

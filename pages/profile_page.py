@@ -14,7 +14,10 @@ class ProfilePage(BasePage):
         return Locators
 
     def __init__(self, pw: Page):
-        super().__init__(pw, self.url)
+        super().__init__(pw)
+        self.pw.goto(Urls.main_url)
+        self.header.login_button.click()
+        self.pw.wait_for_load_state(state="networkidle", timeout=5000)
         assign_element = lambda loc: self.pw.locator(loc)
         self.profile__name_input = assign_element(self.locators.profile.name_input)
         self.profile__email_input = assign_element(self.locators.profile.email_input)

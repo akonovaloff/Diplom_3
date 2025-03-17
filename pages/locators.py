@@ -21,6 +21,7 @@ class Locators:
         ingredient_counter = "//p[contains(@class, 'counter_counter__num')]"
         basket_field = "//ul[contains(@class, 'BurgerConstructor_basket')]"
         order_popup_window = "//div[contains(@class, 'Modal_modal__container__')]"
+        order_popup_close_button = f"{order_popup_window}//*[local-name()='svg']"
 
     class Account:
         login_to_account_button = "//button[text()='Войти в аккаунт']"

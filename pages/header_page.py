@@ -2,7 +2,7 @@ from playwright.sync_api import Page
 from pages.locators import Locators as Loc
 
 
-class Header:
+class HeaderPage:
     locators = Loc.Header
 
     def __init__(self, pw: Page):

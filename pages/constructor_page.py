@@ -7,7 +7,10 @@ class ConstructorPage(BasePage):
     locators = Loc.Constructor
 
     def __init__(self, pw: Page):
-        super().__init__(pw, self.url)
+        super().__init__(pw)
+        self.pw.goto(Urls.main_url)
+        self.header.constructor_button.click()
+        self.pw.wait_for_load_state(state="networkidle", timeout=5000)
         assign_element = lambda loc: self.pw.locator(loc)
 
         self.all_ingredients = assign_element(self.locators.all_ingredients)
@@ -25,6 +28,7 @@ class ConstructorPage(BasePage):
         self.order_popup_window = assign_element(self.locators.order_popup_window)
         self.sauces = assign_element(self.locators.sauces)
         self.upper_bun = assign_element(self.locators.upper_bun)
+        self.order_popup_close_button = assign_element(self.locators.order_popup_close_button)
 
     @staticmethod
     def get_quantity(ingredient) -> str:

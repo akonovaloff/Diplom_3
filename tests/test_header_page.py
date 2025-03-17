@@ -6,7 +6,7 @@ from pages.locators import Locators as Loc
 import allure
 
 
-class TestPageHeader:
+class TestHeaderPage:
     @pytest.fixture(params=[Urls.feed, Urls.login, Urls.main_url], autouse=True)
     def start_page(self, pw, request):
         url: str = request.param
@@ -19,8 +19,8 @@ class TestPageHeader:
                             [Loc.Header.feed,           Urls.feed,              Loc.Feed.Status.status_box],
                             [Loc.Header.login,          Urls.login,             Loc.Login.email_input],
     ])
-    def test_transitions_from_header_elements(self, pw, element_to_click: str, destination_url,
-                                              mandatory_element_locator):
+    def test_header_page(self, pw, element_to_click: str, destination_url,
+                         mandatory_element_locator):
         """
         The test checks the transition to the destination pw after clicking on a site header element:
         1. Opens the source pw, waits for the element to be visible (element_to_click), hovers the cursor and takes a screenshot.
