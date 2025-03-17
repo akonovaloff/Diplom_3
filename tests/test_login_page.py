@@ -20,9 +20,9 @@ class TestLoginPage:
         page.email_input.type(user.email)
         page.password_input.type(user.password)
         page.login_button.click()
-        expect(page.pw).to_have_url(Urls.main_url, timeout=3000)
+        page.expect_to_have_url(Urls.main_url)
         page.header.login_button.click()
-        expect(page.pw).to_have_url(Urls.profile, timeout=3000)
+        page.expect_to_have_url(Urls.profile)
         expect(page.pw.locator(f"//*[@value='{user.email}']")).to_be_visible()
 
 

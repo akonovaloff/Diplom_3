@@ -1,4 +1,3 @@
-from sysconfig import expand_makefile_vars
 
 import allure
 
@@ -68,16 +67,16 @@ class TestRestorePassword:
         2. types something to the password field and checks that the password is not visible;
         3. then it clicks on the show password button and checks that the password is visible
         """
-        with transition_to_reset_password_page as pw:
-            page = BasePage(pw, pw.url)
-            pass_phrase = "tested_password"
-            password_field = pw.locator(Loc.Login.password_input)
-            page.type(password_field, pass_phrase)
 
-            assert password_field.text_content() != pass_phrase, "Password must be hidden"
+        page = BasePage(transition_to_reset_password_page)
+        pass_phrase = "tested_password"
+        password_field = page.pw.locator(Loc.Login.password_input)
+        page.type(password_field, pass_phrase)
 
-            show_pass_btn = pw.locator(Loc.Login.show_password_button)
-            page.click(show_pass_btn)
+        assert password_field.text_content() != pass_phrase, "Password must be hidden"
+
+        show_pass_btn = page.pw.locator(Loc.Login.show_password_button)
+        page.click(show_pass_btn)
 
         with allure.step("Assert password is visible"):
             allure.attach(password_field.screenshot(),

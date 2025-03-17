@@ -20,9 +20,10 @@ class BasePage:
 
 
     @allure.step("Open page")
-    def __init__(self, page: Page, url: str):
+    def __init__(self, page: Page, url: str = None):
         self.pw: Page = page
-        self.pw.goto(url=url)
+        if url is not None:
+            self.pw.goto(url=url)
         self.header = Header(self.pw)
         allure.attach(page.screenshot(),
                       name="page-screenshot",
@@ -33,6 +34,7 @@ class BasePage:
     def click(element: Locator):
         element.scroll_into_view_if_needed()
         element.hover()
+        element.wait_for(timeout=3000, state='visible')
         allure.attach(element.screenshot(),
                       name="element-screenshot",
                       attachment_type=allure.attachment_type.PNG)
@@ -48,5 +50,5 @@ class BasePage:
 
     @allure.step("Expecting page to have url")
     def expect_to_have_url(self, url: str):
-        expect(self.pw).to_have_url(url, timeout=0)
+        expect(self.pw).to_have_url(url, timeout=5000)
 
