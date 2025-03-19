@@ -1,7 +1,7 @@
 from pages.base_page import BasePage, Page
 from utils.urls import Urls
 from pages.locators import Locators as Loc
-
+from api.burger_user import BurgerUser
 
 class LoginPage(BasePage):
     url = Urls.login
@@ -9,8 +9,8 @@ class LoginPage(BasePage):
 
     def __init__(self, pw: Page):
         super().__init__(pw)
-        self.pw.goto(Urls.main_url)
-        self.header.login_button.click()
+        if self.pw.url != self.url:
+            self.header.login_button.click()
         self.pw.wait_for_load_state(state="networkidle", timeout=5000)
         assign_element = lambda loc: self.pw.locator(loc)
         self.email_input = assign_element(self.locators.email_input)
@@ -20,3 +20,12 @@ class LoginPage(BasePage):
         self.registration_link = assign_element(self.locators.registration_link)
         self.restore_password_link = assign_element(self.locators.restore_password_link)
 
+    def login_user(self):
+        user = BurgerUser()
+        response = user.registration()
+        assert response.success, "The user must be registered before tests"
+        page = LoginPage(self.pw)
+        page.email_input.type(user.email)
+        page.password_input.type(user.password)
+        page.login_button.click()
+        page.pw.wait_for_selector(Loc.Constructor.order_button, state="visible")

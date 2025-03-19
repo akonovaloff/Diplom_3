@@ -1,9 +1,10 @@
+from random import randint
 from typing import Any, Generator
 
 # framework
 import allure
 
-from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
+from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright, expect
 
 # project
 from utils.browser_config import BrowserConfig
@@ -14,6 +15,31 @@ from pages.base_page import BasePage
 from pages.feed_page import FeedPage
 from pages.profile_page import ProfilePage
 import pytest
+
+
+@pytest.fixture()
+def page_with_user(pw, login_user, existing_user) -> Page:
+    login_user(pw, existing_user)
+    pw.wait_for_load_state(state="networkidle", timeout=3000)
+    return pw
+
+
+
+@pytest.fixture()
+def page_with_order(page_with_user: Page) -> Page:
+    page = ConstructorPage(page_with_user)
+    for _ in range(0, 3):
+        index = randint(2, 14)
+        ingredient = page.all_ingredients.nth(index)
+        ingredient.scroll_into_view_if_needed()
+        ingredient.drag_to(page.basket_field)
+    page.all_ingredients.nth(randint(0, 1)).drag_to(page.basket_field)
+    page.pw.wait_for_load_state(state="networkidle", timeout=6000)
+    page.click(page.order_button)
+    expect(page.order_popup_window).to_be_visible()
+    page.order_popup_close_button.click()
+    expect(page.order_popup_window).to_be_hidden()
+    return page.pw
 
 
 @pytest.fixture()

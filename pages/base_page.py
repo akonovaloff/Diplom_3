@@ -3,6 +3,7 @@ from playwright.sync_api import Page, Locator, expect
 from abc import abstractmethod
 from pages.header_page import HeaderPage
 from api.burger_user import BurgerUser
+from utils.urls import Urls
 
 class BasePage:
     user: BurgerUser
@@ -15,6 +16,8 @@ class BasePage:
     def __init__(self, page: Page):
         self.pw: Page = page
         self.header = HeaderPage(self.pw)
+        if self.pw.url == "about:blank":
+            self.pw.goto(Urls.main_url)
 
     @allure.step("Click on an element")
     def click(self, element: Locator):

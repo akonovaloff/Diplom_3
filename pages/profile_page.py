@@ -15,8 +15,8 @@ class ProfilePage(BasePage):
 
     def __init__(self, pw: Page):
         super().__init__(pw)
-        self.pw.goto(Urls.main_url)
-        self.header.login_button.click()
+        if self.pw.url != self.url:
+            self.header.login_button.click()
         self.pw.wait_for_load_state(state="networkidle", timeout=5000)
         assign_element = lambda loc: self.pw.locator(loc)
         self.profile__name_input = assign_element(self.locators.profile.name_input)
@@ -37,3 +37,9 @@ class ProfilePage(BasePage):
         self.feed__order_popup = assign_element(self.locators.feed.order_popup)
         self.feed__order_popup__order_number = assign_element(self.locators.feed.order_popup__order_number)
         self.feed__order_popup__close_button = assign_element(self.locators.feed.order_popup__close_button)
+
+
+    def get_order_id(self, order_index: int):
+        self.click(self.header.login_button)
+        self.click(self.profile__feed_button)
+        order_number = self.feed__order_list.nth(order_index)

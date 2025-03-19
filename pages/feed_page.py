@@ -9,8 +9,8 @@ class FeedPage(BasePage):
 
     def __init__(self, pw: Page):
         super().__init__(pw)
-        self.pw.goto(Urls.main_url)
-        self.header.feed_button.click()
+        if self.pw.url != self.url:
+            self.header.feed_button.click()
         self.pw.wait_for_load_state(state="networkidle", timeout=5000)
         assign_element = lambda loc: self.pw.locator(loc)
         # Orders

@@ -37,8 +37,8 @@ class Locators:
 
         class Status:
             status_box = "//div[contains(@class, 'OrderFeed_contentBox')]"
-            status_total_order_counter = "(//*[@class='OrderFeed_number__2MbrQ text text_type_digits-large'])(1)"
-            status_today_order_counter = "(//*[@class='OrderFeed_number__2MbrQ text text_type_digits-large'])(2)"
+            status_total_order_counter = "(//*[@class='OrderFeed_number__2MbrQ text text_type_digits-large'])[1]"
+            status_today_order_counter = "(//*[@class='OrderFeed_number__2MbrQ text text_type_digits-large'])[2]"
             status_ready_orders_list = "(//ul[contains(@class, 'OrderFeed_orderList__cBvyi')])[1]/li"
             status_preparing_orders_list = "(//ul[contains(@class, 'OrderFeed_orderList__cBvyi')])[2]/li"
 
