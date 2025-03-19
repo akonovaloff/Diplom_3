@@ -1,5 +1,9 @@
 pytest
-requests
 allure-pytest
 faker
 pytest-xdist
+pytest-playwright
+playwright
+PyAutoGUI
+allure-python-commons
+requests
