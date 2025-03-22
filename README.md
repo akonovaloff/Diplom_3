@@ -13,23 +13,17 @@
 
 #### 2. Личный кабинет
 
-- [x] переход в «Личный кабинет» из шапки сайта: [test_site_header](tests/test_header_page.py),
-- [x] вход в аккаунт: [test_login_to_account](tests/test_login_page.py), 
-- [x] переход в раздел «История заказов»: [test_user_logout](tests/test_profile_page.py),
-- [x] выход из аккаунта: [test_user_logout](tests/test_profile_page.py).
+- [x] переход в «Личный кабинет» из шапки сайта
+- [x] вход в аккаунт
+- [x] переход в раздел «История заказов»:
+- [x] выход из аккаунта:
 
 #### 3. Проверка основного функционала
 
-- [Test: test_site_header](tests/test_site_header.py)
 - [x] переход по клику на «Конструктор»,
 - [x] переход по клику на «Лента заказов»,
-
-
-- [Test: test_ingredients_details_popup_window](tests/test_constructor_page.py)
 - [x] если кликнуть на ингредиент, появится всплывающее окно с деталями,
 - [x] всплывающее окно закрывается кликом по крестику,
-
-
 - [x] при добавлении ингредиента в заказ, увеличивается каунтер данного ингредиента
 - [x] залогиненный пользователь может оформить заказ.
 
@@ -45,11 +39,9 @@
 
 1. Установка зависимостей:  
    ```pip install -r requirements.txt```
-2. Настройка параметров браузера для тестов:  
-   [utils/browser_config.py](utils/browser_config.py)
-3. Настройка pytest:  
+2. Настройка pytest:  
    [pytest.ini](pytest.ini)
-4. Запуск тестов:  
+3. Запуск тестов:  
    ```pytest```
-5. Просмотр allure-отчета:  
+4. Просмотр allure-отчета:  
    ```allure serve reports/allure-results```  

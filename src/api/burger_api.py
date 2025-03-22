@@ -1,5 +1,5 @@
 import requests
-from api.burger_api_endpoints import BurgerApiEndpoints as ApiEndpoints
+from src.api.burger_api_endpoints import BurgerApiEndpoints as ApiEndpoints
 import inspect
 
 

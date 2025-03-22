@@ -1,5 +1,5 @@
 from faker import Faker
-from api.burger_api import BurgerApi as Api
+from src.api.burger_api import BurgerApi as Api
 
 
 class BurgerUser:
