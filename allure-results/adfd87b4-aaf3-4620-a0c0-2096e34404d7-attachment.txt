@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'johnathangoodman@hotmail.com', 'password': 'md#5IqZa', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'johnathangoodman@hotmail.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTY2OWVkMjgwMDAxYjVhZjcyZCIsImlhdCI6MTc0Mjc0ODI2MiwiZXhwIjoxNzQyNzQ5NDYyfQ.VAOsYlBz01MkQrb8i0gpiY_LuTu3jFv8z-n_yL_99nM', 'refreshToken': '05f4e71501ff6e6d7effbc980571cff42a179f0c84d8a50b4e12d1e4d1e1e4e34daf94e213df446b'})

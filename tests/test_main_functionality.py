@@ -1,5 +1,3 @@
-import time
-from profile import Profile
 from random import randint
 
 import allure
@@ -45,7 +43,7 @@ class TestMainFunctionality:
         page = ConstructorPage(driver)
         ingredient_name = page.click_on_ingredient_by_index(ingredient_index).text
         allure.dynamic.parameter("ingredient_index", f"{ingredient_index} - {ingredient_name}")
-        ingredient_info = page.wait_for_element_to_be_visible(page.INGREDIENT_INFO__INGREDIENT_NAME).text
+        ingredient_info = page.wait_for_ingredient_info_popup_window_to_be_visible()
         assert ingredient_name in ingredient_info
 
     @allure.title("Клик по крестику закрывает всплывающее окно с деталями")
@@ -54,8 +52,7 @@ class TestMainFunctionality:
         page.goto_page(Urls.base_url)
         page.click_on_ingredient_by_index(randint(0, 14))
         page.close_ingredient_info()
-        page.wait_for_element_to_be_invisible(page.INGREDIENT_INFO)
-        assert page.element_is_visible(page.INGREDIENT_INFO) is False
+        assert page.is_ingredient_info_visible() is False
 
     @allure.title("Добавление ингредиента увеличивает счетчик")
     def test_adding_an_ingredient_increase_counter(self, driver):
@@ -64,36 +61,30 @@ class TestMainFunctionality:
         i = 0
         for i in range(1, randint(2, 5)):
             page.add_ingredient(ingredient_index)
-        counter = int(page.find_element(page.INGREDIENT_COUNTER, ingredient_index).text)
+        counter = page.get_ingredient_counter(ingredient_index)
         assert counter == i
 
     @allure.title("Залогиненный пользователь может оформить заказ")
     def test_create_order(self, driver, registered_user):
         PersonalAccountPage(driver).login_user(registered_user)
         page = ConstructorPage(driver)
-        page.add_bun()
-        page.add_sauce()
-        page.add_filling()
-        page.click_on_create_order_button()
-        page.wait_for_element_to_be_visible(page.ORDER_POPUP)
-        page.wait_for_loading_animation()
-        assert page.element_is_visible(page.ORDER_POPUP)
+        ConstructorPage(driver).make_an_order()
+        assert page.is_order_info_visible()
 
     @allure.title("Заказы раздела «История заказов» отображаются в «Лента заказов»")
     def test_user_order_history_is_displayed_on_the_feed_page(self, driver, page_with_order):
         page = PersonalAccountPage(driver)
         page.click_on_order_history_button()
         order_number = page.get_order_id(0)
-        order = FeedPage(driver).find_by_text(order_number)[0]
-        order.click()
-        assert order_number in order.text
+        order = FeedPage(driver).find_by_text(order_number)[0].text
+        assert order_number in order
 
     @allure.title("Новый заказ увеличивает счетчик «Выполнено за все время»")
     def test_total_count(self, driver, registered_user):
         total_counter = FeedPage(driver).get_total_counter()
         PersonalAccountPage(driver).login_user(registered_user)
         ConstructorPage(driver).make_an_order()
-        order_id = PersonalAccountPage(driver).get_order_id(0).replace("#", "")
+        order_id = PersonalAccountPage(driver).get_order_id(0)
         feed_page = FeedPage(driver)
         feed_page.wait_for_order_to_be_done(order_id)
         assert int(FeedPage(driver).get_total_counter()) > int(total_counter)
@@ -103,7 +94,7 @@ class TestMainFunctionality:
         today_counter = FeedPage(driver).get_today_counter()
         PersonalAccountPage(driver).login_user(registered_user)
         ConstructorPage(driver).make_an_order()
-        order_id = PersonalAccountPage(driver).get_order_id(0).replace("#", "")
+        order_id = PersonalAccountPage(driver).get_order_id(0)
         feed_page = FeedPage(driver)
         feed_page.wait_for_order_to_be_done(order_id)
         assert int(FeedPage(driver).get_today_counter()) > int(today_counter)
@@ -112,10 +103,10 @@ class TestMainFunctionality:
     def test_created_order_displayed_at_in_progress(self, driver, registered_user):
         PersonalAccountPage(driver).login_user(registered_user)
         ConstructorPage(driver).make_an_order()
-        order_id = PersonalAccountPage(driver).get_order_id(0).replace("#", "")
+        order_id = PersonalAccountPage(driver).get_order_id(0)
         feed_page = FeedPage(driver)
         feed_page.set_timeout(20)
-        orders_id_list = feed_page.wait_element_to_have_text(feed_page.ORDERS_IN_PROGRESS, order_id)
-        assert order_id in orders_id_list[0].text
+        orders_id_list = feed_page.wait_for_order_to_be_in_progress(order_id)
+        assert order_id in orders_id_list
 
 

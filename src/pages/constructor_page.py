@@ -35,6 +35,7 @@ class ConstructorPage(HeaderPage):
     @allure.step("Закрыть информацию об ингредиенте")
     def close_ingredient_info(self):
         self.click_on(self.INGREDIENT_INFO__CLOSE_BUTTON)
+        self.wait_for_element_to_be_invisible(self.INGREDIENT_INFO)
 
     @allure.step("Добавить булочку")
     def add_bun(self):
@@ -56,6 +57,7 @@ class ConstructorPage(HeaderPage):
     @allure.step("Клик по кнопке «Создать заказ»")
     def click_on_create_order_button(self):
         self.click_on(self.CREATE_ORDER_BUTTON)
+        self.wait_for_element_to_be_visible(self.ORDER_POPUP)
 
     @allure.step("Создать новый заказ")
     def make_an_order(self):
@@ -63,10 +65,29 @@ class ConstructorPage(HeaderPage):
         self.add_sauce()
         self.add_filling()
         self.click_on_create_order_button()
-        self.wait_for_element_to_be_visible(self.ORDER_POPUP)
         self.wait_for_loading_animation()
         self.close_order_popup_window()
 
     @allure.step("Закрыть окно создания заказа")
     def close_order_popup_window(self):
         self.click_on(self.ORDER_POPUP_CLOSE_BUTTON)
+
+    @allure.step("Ожидание открытия всплывающего окна с информацией по ингредиенту")
+    def wait_for_ingredient_info_popup_window_to_be_visible(self) -> str:
+        return self.wait_for_element_to_be_visible(self.INGREDIENT_INFO__INGREDIENT_NAME).text
+
+    @allure.step("Ожидание открытия всплывающего окна с информацией по заказу")
+    def wait_for_order_popup_window_to_be_visible(self):
+        return self.wait_for_element_to_be_visible(self.ORDER_POPUP)
+
+    @allure.step("Проверка, что окно с информацией по ингредиенту видимо")
+    def is_ingredient_info_visible(self):
+        return self.element_is_visible(self.INGREDIENT_INFO)
+
+    @allure.step("Проверка, что окно с информацией по заказу видимо")
+    def is_order_info_visible(self):
+        return self.element_is_visible(self.ORDER_POPUP)
+
+    @allure.step("Получить счетчик ингредиента")
+    def get_ingredient_counter(self, index):
+        return int(self.find_element(self.INGREDIENT_COUNTER, index).text)

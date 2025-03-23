@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'katieharris@gilmore.net', 'password': '@@qj8^Mh', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'katieharris@gilmore.net', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTQwOWVkMjgwMDAxYjVhZjZmZSIsImlhdCI6MTc0Mjc0ODIyNCwiZXhwIjoxNzQyNzQ5NDI0fQ.a9MTQuYNFAG6sgd-CQMIxr7DlzgKAKAkW-SuEEbk57o', 'refreshToken': 'ac23d3f209d29f46c4527d3aa1867260677fce1924a866839149ae04807deda46e2caf578ff8887f'})

@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'flowerselizabeth@hotmail.com', 'password': 'f%8CP#va', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'flowerselizabeth@hotmail.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTJmOWVkMjgwMDAxYjVhZjZlYiIsImlhdCI6MTc0Mjc0ODIwNywiZXhwIjoxNzQyNzQ5NDA3fQ.tkm7_fLuPpxJ_eISIOmqgpzpRbZkt_OjPNifMg9weWI', 'refreshToken': '2851dffb3ed933666069b670b26c536d36a12d6be90fef329ecbefb8f13bba11af6fc9465e2bd608'})

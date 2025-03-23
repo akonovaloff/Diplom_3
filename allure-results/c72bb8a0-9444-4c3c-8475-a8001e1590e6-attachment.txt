@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'gardnerpaul@harvey.com', 'password': '**6Umu%u', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'gardnerpaul@harvey.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTYyOWVkMjgwMDAxYjVhZjcyOSIsImlhdCI6MTc0Mjc0ODI1OCwiZXhwIjoxNzQyNzQ5NDU4fQ.arWQhzESFItjtUgM2wLLAtEv5dZMeZ2LizRO8_SB3bE', 'refreshToken': '15e6beeebdb58927e60c9ab06c083fee7c5cb658516f495a621c4d62219698c11851356e853665c4'})

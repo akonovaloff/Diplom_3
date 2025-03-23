@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'john84@howe.com', 'password': '9A#8LiBH', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'john84@howe.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTJmOWVkMjgwMDAxYjVhZjZlZiIsImlhdCI6MTc0Mjc0ODIwNywiZXhwIjoxNzQyNzQ5NDA3fQ.V91lTSpoYEnM03mEUnal_7D9Wy-LjMDZVvuwHdV-m80', 'refreshToken': '56d0466f2c725e277c744207fe3bdbc6c5c5f3e37866e13f65bebde0634928d99dc32455e7a64792'})

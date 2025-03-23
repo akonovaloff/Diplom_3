@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'morenocharles@gmail.com', 'password': '$1J5JEgj', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'morenocharles@gmail.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTJmOWVkMjgwMDAxYjVhZjZlZCIsImlhdCI6MTc0Mjc0ODIwNywiZXhwIjoxNzQyNzQ5NDA3fQ.AI41iX8gKUOAqkCr3BD_8y7oryPsJMizfwgUnj7L-r0', 'refreshToken': '7594f4a5395463bb691b503a0d21aa1473a0953845f960346ef2b9e60cbcd01cc5ec390b44253f66'})

@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'janethill@reeves.biz', 'password': '(&X2BeWH', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'janethill@reeves.biz', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTYyOWVkMjgwMDAxYjVhZjcyNyIsImlhdCI6MTc0Mjc0ODI1OCwiZXhwIjoxNzQyNzQ5NDU4fQ.27ACt5_mNCXnLLJzMqJiNop2SzD1nPNcfys8ncc0Pho', 'refreshToken': 'c31aa018610672373055ac9d3e3c59c04b3e983277a587c6faae7609165d48dc6a540df2c008bd47'})

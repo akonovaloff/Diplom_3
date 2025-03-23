@@ -59,29 +59,6 @@ class BurgerUser:
                 "name": self.user.name
             }
 
-        @property
-        def no_password(self):
-            # Возвращает словарь без password
-            return {
-                "email": self.user.email,
-                "name": self.user.name
-            }
-
-        @property
-        def no_name(self):
-            # Возвращает словарь без name
-            return {
-                "email": self.user.email,
-                "password": self.user.password
-            }
-
-        @property
-        def no_email(self):
-            # Возвращает словарь без email
-            return {
-                "password": self.user.password,
-                "name": self.user.name
-            }
 
     def registration(self):
         response = self.api.register_user(self.payload.full)
@@ -96,13 +73,6 @@ class BurgerUser:
             response = self.registration()
         return response
 
-    def update_info(self):
-        response = self.api.patch_user_info(self.access_token, self.payload.full)
-        if response.success:
-            self.__update_server_info()
-        else:
-            self.__restore_server_info()
-        return response
 
     def __update_server_info(self):
         is_info_updated = False
@@ -117,22 +87,3 @@ class BurgerUser:
             self.__server_email = self.email
         if is_info_updated:
             print(self)
-
-    def __restore_server_info(self):
-        self.name = self.__server_name
-        self.password = self.__server_password
-        self.email = self.__server_email
-
-    def login(self):
-        response = self.api.login_user(self.payload.no_name)
-        if response.success:
-            self.__update_server_info()
-            self.access_token = response.data['accessToken']
-            self.__refresh_token = response.data['refreshToken']
-        else:
-            self.__restore_server_info()
-        return response
-
-    def logout(self):
-        response = self.api.logout_user(refresh_token=self.__refresh_token)
-        return response

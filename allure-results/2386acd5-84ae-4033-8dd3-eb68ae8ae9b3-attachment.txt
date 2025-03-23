@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'pbrown@yahoo.com', 'password': 'e_B86WZu', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'pbrown@yahoo.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTZhOWVkMjgwMDAxYjVhZjczMSIsImlhdCI6MTc0Mjc0ODI2NiwiZXhwIjoxNzQyNzQ5NDY2fQ.qcw8156qI3aGdQciKKGM7vX89VL5vlgYM_NPD50vBzk', 'refreshToken': '8b41da4edfc5c67fd9f36bb0c08bb8211e9c04ab6cce6f088672d5c2c986af1b7baf3d5c8c32a669'})

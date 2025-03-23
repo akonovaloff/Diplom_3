@@ -1,3 +1,5 @@
+import time
+
 from src.pages.header_page import HeaderPage
 from src.helpers.urls import Urls
 
@@ -23,9 +25,9 @@ class FeedPage(HeaderPage):
     def __init__(self, driver):
         super().__init__(driver)
         if self.get_current_url() != Urls.feed_page:
-            self.click_on_header__feed_button()
             self.wait_for_loading_animation()
-            self.wait_for_element_to_be_invisible(self.FEED_LOADING_ANIMATION)
+            self.click_on_header__feed_button()
+
 
     @allure.step("Клик по заказу")
     def click_on_order(self, index: int):
@@ -55,11 +57,13 @@ class FeedPage(HeaderPage):
     def wait_for_order_to_be_in_progress(self, order_id: str):
         _def_timeout = self.timeout
         self.set_timeout(20)
-        self.wait_element_to_have_text(self.ORDERS_IN_PROGRESS, order_id)
+        _text = self.wait_element_to_have_text(self.ORDERS_IN_PROGRESS, order_id)[0].text
         self.set_timeout(_def_timeout)
+        return _text
 
     def wait_for_order_to_be_done(self, order_id: str):
         _def_timeout = self.timeout
         self.set_timeout(20)
         self.wait_element_to_have_text(self.ORDERS_IS_DONE, order_id)
+        time.sleep(1)
         self.set_timeout(_def_timeout)

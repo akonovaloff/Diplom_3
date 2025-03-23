@@ -15,7 +15,6 @@ class PersonalAccountPage(HeaderPage):
     LOGOUT_BUTTON = (By.XPATH, "(//button)[1]")
     ORDER_LOADING_ANIMATION = (By.XPATH, "//*[text()='Загрузка...']")
 
-
     ORDER_LIST__ITEMS = FeedPage.ORDER_LIST__ITEMS
     ORDER_LIST__NUMBERS = FeedPage.ORDER_LIST__NUMBERS
     ORDER_INFO = FeedPage.ORDER_INFO
@@ -26,8 +25,9 @@ class PersonalAccountPage(HeaderPage):
     def __init__(self, driver):
         super().__init__(driver)
         if self.get_current_url() not in [Urls.login_page, Urls.profile_page]:
-            self.click_on_header__account_button()
             self.wait_for_loading_animation()
+            self.click_on_header__account_button()
+
 
     @allure.step("Ввод email")
     def enter_email(self, email: str):
@@ -50,8 +50,8 @@ class PersonalAccountPage(HeaderPage):
 
     @allure.step("Клик по кнопке «История заказов»")
     def click_on_order_history_button(self):
+        self.wait_for_loading_animation()
         self.click_on(self.ORDER_HISTORY_BUTTON)
-        self.wait_for_element_to_be_invisible(self.ORDER_LOADING_ANIMATION)
 
     @allure.step("Выход из аккаунта")
     def click_on_logout_button(self):
@@ -64,7 +64,7 @@ class PersonalAccountPage(HeaderPage):
             self.click_on_header__account_button()
         if _page_url not in [Urls.order_history_page]:
             self.click_on_order_history_button()
-        return self.find_element(self.ORDER_LIST__NUMBERS, index).text
+        return self.find_element(self.ORDER_LIST__NUMBERS, index).text.replace("#", "")
 
     @allure.step("Ожидание статуса заказа")
     def wait_for_order_to_have_status(self, order_index: int, status: str):

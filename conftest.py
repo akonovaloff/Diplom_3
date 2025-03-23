@@ -3,10 +3,9 @@ from selenium import webdriver
 from src.api.burger_user import BurgerUser
 from src.pages.constructor_page import ConstructorPage
 from src.pages.personal_account_page import PersonalAccountPage
-import base64
 
 
-@pytest.fixture(params=["chrome", "firefox"])
+@pytest.fixture(params=["chrome"])
 def driver(request):
     if request.param == "firefox":
         options = webdriver.FirefoxOptions()

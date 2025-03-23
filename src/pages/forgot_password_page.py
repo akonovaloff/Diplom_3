@@ -18,8 +18,8 @@ class ForgotPasswordPage(HeaderPage):
     def __init__(self, driver):
         super().__init__(driver)
         if self.get_current_url() not in [Urls.forgot_password_page, Urls.reset_password_page, Urls.login_page]:
-            self.click_on_header__account_button()
             self.wait_for_loading_animation()
+            self.click_on_header__account_button()
 
     @allure.step("Перейти на страницу авторизации")
     def goto_login_page(self):

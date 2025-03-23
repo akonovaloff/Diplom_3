@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'villanuevawilliam@mcpherson.biz', 'password': '&7hVO!sg', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'villanuevawilliam@mcpherson.biz', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTVkOWVkMjgwMDAxYjVhZjcxZCIsImlhdCI6MTc0Mjc0ODI1MywiZXhwIjoxNzQyNzQ5NDUzfQ.kyMSA9uinSfUQygBkkgNdTahSL_5DPUKwh_YyZ9zeME', 'refreshToken': 'bcf1fcc41e00be04baf0a3f78836f0c03cb4fae85a65da548464bd4fa1612aa7a4cf5a702d13233d'})

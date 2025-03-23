@@ -10,7 +10,6 @@ from selenium.webdriver.common.by import By
 class BasePage:
     driver: WebDriver
     LOADING_ANIMATION = (By.XPATH, "//img[@alt='loading animation']")
-    OVERLAY = (By.XPATH, "//div[contains(@class, 'Modal_modal_overlay__x2ZCr')]")
 
     @allure.step("Создать вкладку браузера")
     def __init__(self, driver):
