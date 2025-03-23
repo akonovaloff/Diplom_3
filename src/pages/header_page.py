@@ -16,7 +16,7 @@ class HeaderPage(BasePage):
     @allure.step("Создать страницу")
     def __init__(self, driver):
         super().__init__(driver)
-        if self.driver.current_url not in Urls.base_url:
+        if self.get_current_url() not in Urls.base_url:
             self.goto_page(Urls.base_url)
             self.wait_for_loading_animation()
 

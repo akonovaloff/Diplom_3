@@ -24,6 +24,7 @@ class TestMainFunctionality:
         page.goto_page(start_page)
         page.click_on_header__constructor()
         page.wait_for_url_to_be(Urls.base_url)
+        assert page.get_current_url() == Urls.base_url
 
     @pytest.mark.parametrize("start_page", [Urls.base_url,
                                             Urls.feed_page,
@@ -36,6 +37,7 @@ class TestMainFunctionality:
         page.goto_page(start_page)
         page.click_on_header__feed_button()
         page.wait_for_url_to_be(Urls.feed_page)
+        assert page.get_current_url() == Urls.feed_page
 
     @pytest.mark.parametrize("ingredient_index", range(0, 15))
     @allure.title("Клик по ингредиенту открывает всплывающее окно с деталями")
@@ -53,6 +55,7 @@ class TestMainFunctionality:
         page.click_on_ingredient_by_index(randint(0, 14))
         page.close_ingredient_info()
         page.wait_for_element_to_be_invisible(page.INGREDIENT_INFO)
+        assert page.element_is_visible(page.INGREDIENT_INFO) is False
 
     @allure.title("Добавление ингредиента увеличивает счетчик")
     def test_adding_an_ingredient_increase_counter(self, driver):
@@ -74,6 +77,7 @@ class TestMainFunctionality:
         page.click_on_create_order_button()
         page.wait_for_element_to_be_visible(page.ORDER_POPUP)
         page.wait_for_loading_animation()
+        assert page.element_is_visible(page.ORDER_POPUP)
 
     @allure.title("Заказы раздела «История заказов» отображаются в «Лента заказов»")
     def test_user_order_history_is_displayed_on_the_feed_page(self, driver, page_with_order):
@@ -111,4 +115,7 @@ class TestMainFunctionality:
         order_id = PersonalAccountPage(driver).get_order_id(0).replace("#", "")
         feed_page = FeedPage(driver)
         feed_page.set_timeout(20)
-        feed_page.wait_element_to_have_text(feed_page.ORDERS_IN_PROGRESS, order_id)
+        orders_id_list = feed_page.wait_element_to_have_text(feed_page.ORDERS_IN_PROGRESS, order_id)
+        assert order_id in orders_id_list[0].text
+
+

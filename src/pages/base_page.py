@@ -15,7 +15,7 @@ class BasePage:
     @allure.step("Создать вкладку браузера")
     def __init__(self, driver):
         self.driver = driver
-        self.timeout = 10
+        self.timeout = 15
         self.wait = WebDriverWait(self.driver, self.timeout)
         self.driver.maximize_window()
 
@@ -129,3 +129,7 @@ class BasePage:
     @allure.step("Ожидание текста в элементе")
     def wait_element_to_have_text(self, locator, text: str):
         self.wait.until(ec.text_to_be_present_in_element(locator, text))
+        return self.find_by_text(text)
+
+    def element_is_visible(self, locator):
+        return self.find_element(locator).is_displayed()

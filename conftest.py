@@ -3,6 +3,8 @@ from selenium import webdriver
 from src.api.burger_user import BurgerUser
 from src.pages.constructor_page import ConstructorPage
 from src.pages.personal_account_page import PersonalAccountPage
+import base64
+
 
 @pytest.fixture(params=["chrome", "firefox"])
 def driver(request):
@@ -17,6 +19,7 @@ def driver(request):
 
     driver.quit()
 
+
 @pytest.fixture
 def registered_user() -> BurgerUser:
     """Generate new user data: email, password, name"""
@@ -24,8 +27,8 @@ def registered_user() -> BurgerUser:
     user.registration()
     return user
 
+
 @pytest.fixture()
 def page_with_order(driver, registered_user):
     PersonalAccountPage(driver).login_user(registered_user)
     ConstructorPage(driver).make_an_order()
-    return driver

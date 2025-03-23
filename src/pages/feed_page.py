@@ -22,7 +22,7 @@ class FeedPage(HeaderPage):
     @allure.step("Создать страницу «Лента заказов»")
     def __init__(self, driver):
         super().__init__(driver)
-        if self.driver.current_url != Urls.feed_page:
+        if self.get_current_url() != Urls.feed_page:
             self.click_on_header__feed_button()
             self.wait_for_loading_animation()
             self.wait_for_element_to_be_invisible(self.FEED_LOADING_ANIMATION)

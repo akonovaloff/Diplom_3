@@ -25,7 +25,7 @@ class PersonalAccountPage(HeaderPage):
     @allure.step("Создать страницу «Личный кабинет»")
     def __init__(self, driver):
         super().__init__(driver)
-        if self.driver.current_url not in [Urls.login_page, Urls.profile_page]:
+        if self.get_current_url() not in [Urls.login_page, Urls.profile_page]:
             self.click_on_header__account_button()
             self.wait_for_loading_animation()
 

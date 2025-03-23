@@ -24,7 +24,7 @@ class ConstructorPage(HeaderPage):
     @allure.step("Создать страницу «Конструктор»")
     def __init__(self, driver):
         super().__init__(driver)
-        if self.driver.current_url not in Urls.base_url:
+        if self.get_current_url() not in Urls.base_url:
             self.click_on_header__constructor()
             self.wait_for_loading_animation()
 
