@@ -58,7 +58,7 @@ class PersonalAccountPage(HeaderPage):
         self.click_on(self.LOGOUT_BUTTON)
 
     @allure.step("Получить id заказа")
-    def get_order_id(self, index: int):
+    def get_order_id(self, index: int) -> str:
         _page_url = self.get_current_url()
         if _page_url not in [Urls.order_history_page, Urls.profile_page]:
             self.click_on_header__account_button()

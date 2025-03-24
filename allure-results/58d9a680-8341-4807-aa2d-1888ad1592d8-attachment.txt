@@ -1,2 +1,0 @@
-StellarBurgerUser: {'email': 'tammy28@hotmail.com', 'password': '$RTP62Sq', 'name': 'TestUser'}
-impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'tammy28@hotmail.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTJmOWVkMjgwMDAxYjVhZjZlOSIsImlhdCI6MTc0Mjc0ODIwNywiZXhwIjoxNzQyNzQ5NDA3fQ.R09Q6Yb5jx9xUW6VyDCnB7FP88xCXdObBscqfpeBuX8', 'refreshToken': '9276186e0df6c93078bfad13dfa56d77c472a6cccf3a3964a08dfb6802916994b81c5d506d2546be'})

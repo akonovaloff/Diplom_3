@@ -1,2 +1,0 @@
-StellarBurgerUser: {'email': 'colejoseph@hernandez-reyes.com', 'password': 'xdo)H0Ec', 'name': 'TestUser'}
-impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'colejoseph@hernandez-reyes.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTU3OWVkMjgwMDAxYjVhZjcxNSIsImlhdCI6MTc0Mjc0ODI0NywiZXhwIjoxNzQyNzQ5NDQ3fQ.Ujk8YY2cFbSH9sM9slg1uGYTx40sEjZKod6K5BcUNyg', 'refreshToken': 'ac3802adae11a7117358f7e2120674f95f9a7707961086de4ba322a76d6b1021ff5e156d8a911d52'})

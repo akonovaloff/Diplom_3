@@ -61,9 +61,9 @@ class FeedPage(HeaderPage):
         self.set_timeout(_def_timeout)
         return _text
 
+    @allure.step("Ожидание, пока счетчик выполненных заказов станет больше или равен номеру текущего заказа")
     def wait_for_order_to_be_done(self, order_id: str):
         _def_timeout = self.timeout
         self.set_timeout(20)
-        self.wait_element_to_have_text(self.ORDERS_IS_DONE, order_id)
-        time.sleep(1)
+        self.wait_element_to_have_text(self.TOTAL_COUNTER, str(int(order_id)))
         self.set_timeout(_def_timeout)

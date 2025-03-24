@@ -1,2 +1,0 @@
-StellarBurgerUser: {'email': 'williamsjohn@yahoo.com', 'password': 's$0JCnRf', 'name': 'TestUser'}
-impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'williamsjohn@yahoo.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTAzYTNmOWVkMjgwMDAxYjVhZjZmOCIsImlhdCI6MTc0Mjc0ODIyMywiZXhwIjoxNzQyNzQ5NDIzfQ.8NdyI9rAz9lF39NlSec2DiL_Bjf_kHC8-elJd83TfD8', 'refreshToken': '8138faa25cb4157af575016647dbbb126cea02b87fc35334cb040bfed46d40278572ead1634c395f'})
