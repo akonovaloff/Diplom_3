@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'dtrujillo@yahoo.com', 'password': '_2Dhqv4L', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'dtrujillo@yahoo.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTE0ODUyOWVkMjgwMDAxYjViMDQzZSIsImlhdCI6MTc0MjgxNzM2MiwiZXhwIjoxNzQyODE4NTYyfQ.7wQGEjgmMHFiC2DGMyxzB-5m-ENsiuZUKjVHeaI8Xp0', 'refreshToken': '06866b4a7e808d1f697b36eb27b4d02f25533eed1502c144c154c1beb226d666ea081d383e16d3bc'})

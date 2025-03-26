@@ -1,0 +1,3 @@
+StellarBurgerUser: {'email': 'ibailey@taylor-romero.biz', 'password': '(2lH8qma', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'ibailey@taylor-romero.biz', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTE0ODJmOWVkMjgwMDAxYjViMDQyOSIsImlhdCI6MTc0MjgxNzMyNywiZXhwIjoxNzQyODE4NTI3fQ.YR_oKxqEgbRrNkBxrRjIe3tmMzoTtlGb2xHCjwMCfsI', 'refreshToken': 'cb439b94e9938d05eaf2cdd29b0ca50b7b8fa496a72c2428acd835128ee0e90b4d65dbdd8a57e6f3'})
+impl:(success=True, status_code=202, data={'success': True, 'message': 'User successfully removed'})

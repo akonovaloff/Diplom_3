@@ -1,0 +1,2 @@
+StellarBurgerUser: {'email': 'karensingh@hays.com', 'password': '_4iXbHaT', 'name': 'TestUser'}
+impl:(success=True, status_code=200, data={'success': True, 'user': {'email': 'karensingh@hays.com', 'name': 'TestUser'}, 'accessToken': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTE0ODQ0OWVkMjgwMDAxYjViMDQzNyIsImlhdCI6MTc0MjgxNzM0OCwiZXhwIjoxNzQyODE4NTQ4fQ.WnRiPvw342hs35RbnIFXTA4vqiBEqg83iBHyNDxB4qI', 'refreshToken': '11203227a3146684f512e02eae64e50a56a26bde44fdad941952fad909337c746e210f00a0149f92'})
