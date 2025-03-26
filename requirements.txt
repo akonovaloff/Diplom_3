@@ -3,3 +3,7 @@ requests
 allure-pytest
 faker
 pytest-xdist
+
+selenium
+allure-pytest
+allure-python-commons
