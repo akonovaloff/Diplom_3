@@ -1,12 +1,17 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
 from src.api.burger_user import BurgerUser
 from src.pages.constructor_page import ConstructorPage
 from src.pages.personal_account_page import PersonalAccountPage
+from webdriver_manager.chrome import ChromeDriverManager
 
+@pytest.fixture(scope="session")
+def driver_path():
+    return ChromeDriverManager().install()
 
 @pytest.fixture(params=["chrome"])
-def driver(request):
+def driver(request, driver_path):
     if request.param == "firefox":
         options = webdriver.FirefoxOptions()
         driver = webdriver.Firefox(options=options)
@@ -16,7 +21,8 @@ def driver(request):
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-gpu")
-        driver = webdriver.Chrome(options=options)
+        service = ChromeService(executable_path=driver_path)
+        driver = webdriver.Chrome(options=options, service=service)
 
     yield driver
 
